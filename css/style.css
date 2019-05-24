@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Maven Pro', 'san-serif';
+    color: #fff;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 81px;
+    z-index: 1;
+    margin-top: -138px;
+    margin-bottom: 43px;
+}
+
+span {
+    font-size: 2.5em;
+    padding-bottom: 10px;
+}
+
+.main {
+    min-height: 100vh;
+    position: relative;
+    background: url(../img/Group2.png) no-repeat center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .45;
+    background-image: -moz-linear-gradient( 150deg, rgb(240, 124, 47) 0%, rgb(238, 41, 212) 100%);
+    background-image: -webkit-linear-gradient( 150deg, rgb(240, 124, 47) 0%, rgb(238, 41, 212) 100%);
+    background-image: -ms-linear-gradient( 150deg, rgb(240, 124, 47) 0%, rgb(238, 41, 212) 100%);
+    z-index: 0;
+}
+
+.first_screen {
+    margin-top: -35px;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.first_screen button {
+    cursor: pointer;
+    box-sizing: content-box;
+    border: 1px solid #fff;
+    border-radius: 70px;
+    background: white;
+    color: grey;
+    min-width: 133px;
+    padding: 20px 30px;
+    margin-bottom: 6px;
+    outline: none;
+}
+
+.first_screen button:hover {
+    border-radius: 50px;
+    transition: 0.3s;
+    box-shadow: 0 0 30px rgba(253, 253, 253, 0.76);
+}
+
+.divform {
+    position: relative;
+}
+
+.drop_input {
+    padding: 20px 63px;
+    background: #fff, .2;
+    border: 0 none;
+    border-radius: 50px;
+    color: grey;
+    outline: none;
+}
+
+.pop_submit {
+    background: url('../img/long-arrow-down.png') 0 0 no-repeat;
+    width: 37px;
+    height: 37px;
+    background-size: cover;
+    border: none;
+    display: block;
+    position: absolute;
+    right: 26px;
+    top: 50%;
+    margin-top: -17px;
+    outline: none;
+    cursor: pointer;
+}
+
+.divform:hover {
+    border-radius: 50px;
+    transition: 0.3s;
+    box-shadow: 0 0 30px rgba(253, 253, 253, 0.76);
+}
+
+.pop_submit:hover {
+    transform: rotate(90deg);
+    transition: 0.7s
+}
+
+.rin {
+    font-weight: bold;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+
+.rin::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    display: inline-block;
+    vertical-align: center;
+    background-color: #fff;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.rin::after {
+    content: '';
+    width: 20px;
+    height: 1px;
+    display: inline-block;
+    vertical-align: center;
+    background-color: #fff;
+    vertical-align: middle;
+    margin-left: 10px;
+}
