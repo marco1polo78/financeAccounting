@@ -5,11 +5,22 @@ const excelCsv = require('excelcsv');
 let table={};
 let sheet1=false,sheet2=false,sheet3=false;
 let IdProvider='';
+let IdCustomer=[];
 
 let parser = new excelCsv(PATHTOEXCEL);
 
 let csv=parser
     .row(row=>{
+        if(sheet3 && (row[1]!=='' || row[3]!=='' || row[5]!=='' || row[7]!=='' ||row[9]!=='')){
+            // console.log(row);
+            for(let i=0;i<row.length/2;i++){
+                if(row[i*2]!=='')
+                    IdCustomer.push(row[i*2]);
+                if(row[(i*2)+1]!=='')
+                    if(table[row[i*2+1]])
+                        table[row[i*2+1]].idcustomer.push(IdCustomer[i]);
+            }
+        }
         if(row[0]==='покупатели' && row[1]==='покупаемый товар'){
             sheet2=false;
             sheet3=true;
@@ -25,7 +36,6 @@ let csv=parser
             sheet2=true;
         }
         if(sheet1 && row[1]!==''){
-            // console.log(row[5]);
             table[row[1]]={
                 name:row[1],
                 idcustomer:[],
