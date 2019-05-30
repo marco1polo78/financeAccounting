@@ -6,6 +6,7 @@ let table={};
 let sheet1=false,sheet2=false,sheet3=false;
 let IdProvider='';
 let IdCustomer=[];
+let serach=process.argv[3];
 
 let parser = new excelCsv(PATHTOEXCEL);
 
@@ -50,7 +51,12 @@ let csv=parser
     })
     .init();
 
-console.log(table['шланг ГАЗ 1/2*1,2м ВВ']);
+if(table[search]){
+    console.log(table[search]);
+}else{
+    console.log('В базі немає такого товару');
+}
+    
 module.exports={
     
 }
