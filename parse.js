@@ -6,7 +6,7 @@ let table={};
 let sheet1=false,sheet2=false,sheet3=false;
 let IdProvider='';
 let IdCustomer=[];
-let serach=process.argv[3];
+let search=process.argv[3];
 
 let parser = new excelCsv(PATHTOEXCEL);
 
