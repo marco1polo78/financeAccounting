@@ -51,8 +51,9 @@ let csv=parser
     })
     .init();
 
-if(table[search]){
-    console.log(table[search]);
+let shorttable=Object.keys(table).filter(e=>e.toLowerCase().match(search));
+if(shorttable.length>0){
+    shorttable.forEach(e=>console.log(table[e]));
 }else{
     console.log('В базі немає такого товару');
 }
