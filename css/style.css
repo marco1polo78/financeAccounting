@@ -146,3 +146,7 @@ span {
     vertical-align: middle;
     margin-left: 10px;
 }
+
+.list li{
+    color:#000;
+}

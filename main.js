@@ -1,27 +1,23 @@
-const {app, BrowserWindow} = require('electron');
-const url = require('url');
-const path = require('path');
+'use strict'
 
-let win;
+const path = require('path')
+const { app, ipcMain } = require('electron')
 
-function createWindow(){
-    win = new BrowserWindow({width: 700, height: 500})
+const Window = require('./Window')
 
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, './.render/index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
+require('electron-reload')(__dirname)
 
-    win.webContents.openDevTools();
-
-    win.on('closed', ()=>{
-        win=null;
-    })
+function main () {
+  // todo list window
+  let mainWindow = new Window({
+    file: path.join('.render', 'index.html')
+  })
+  mainWindow.once('show', () => {
+  })
 }
 
-app.on('ready', createWindow);
+app.on('ready', main)
 
-app.on('window-all-closed', ()=>{
-    app.quit();
+app.on('window-all-closed', function () {
+  app.quit()
 })
