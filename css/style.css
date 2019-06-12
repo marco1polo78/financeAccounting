@@ -150,3 +150,288 @@ span {
 .list li{
     color:#000;
 }
+
+.form-3 {
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    font-weight: 400;
+    /* Size and position */
+    width: 500px;
+    position: relative;
+    margin: 30px auto 30px;
+    padding: 10px;
+    overflow: hidden;
+ 
+    /* Styles */
+    background: #fff;
+    border-radius: 0.4em;
+    border: 1px solid #fff;
+    box-shadow:
+        inset 0 0 2px 1px rgba(255, 255, 255, 0.08),
+        0 16px 10px -8px rgba(0, 0, 0, 0.6);
+}
+
+.form-3 label {
+    /* Size and position */
+    width: 50%;
+    float: left;
+    padding-top: 9px;
+ 
+    /* Styles */
+    color: rgb(100, 59, 109);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #fff;
+    text-indent: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+ 
+.form-3 input[type=text],
+.form-3 input[type=password] {
+    /* Size and position */
+    width: 50%;
+    float: left;
+    padding: 8px 5px;
+    margin-bottom: 10px;
+    font-size: 12px;
+ 
+    /* Styles */
+    background: #fff;   
+    border: 1px solid #fff;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.1);
+    border-radius: 3px;
+ 
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: rgb(106, 65, 116);
+ 
+}
+ 
+.form-3 input[type=text]:hover,
+.form-3 input[type=password]:hover,
+.form-3 label:hover ~ input[type=text],
+.form-3 label:hover ~ input[type=password] {
+    background: #ffffff;
+}
+ 
+.form-3 input[type=text]:focus,
+.form-3 input[type=password]:focus {
+    box-shadow: inset 0 0 2px #000;
+    background: #fff;
+    border-color: #AD68BC;
+    outline: none; /* Remove Chrome outline */
+}
+
+.form-3 p:nth-child(3),
+.form-3 p:nth-child(4) {
+    float: left;
+    width: 50%;
+}
+
+.form-3 label[for=remember] {
+    width: auto;
+    float: none;
+    display: inline-block;
+    text-transform: capitalize;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-indent: 2px;
+}
+ 
+.form-3 input[type=checkbox] {
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.form-3 input[type=button] {
+    /* Width and position */
+    width: 100%;
+    padding: 8px 5px;
+   
+    /* Styles */
+    border: 1px solid #AD68BC; /* Fallback */
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 10px 10px rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: #AD68BC;
+    cursor:pointer;
+   
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+ 
+.form-3 input[type=button]:hover {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+ 
+.form-3 input[type=button]:active {
+    background: #287db5;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.6);
+    border-color: #000; /* Fallback */
+    border-color: rgba(0,0,0,0.9);
+}
+ 
+.no-boxshadow .form-3 input[type=button]:hover {
+    background: #2a92d8;
+}
+
+/* Gradient line */
+.form-3:after {
+    /* Size and position */
+    content: "";
+    height: 1px;
+    width: 33%;
+    position: absolute;
+    left: 20%;
+    top: 0;
+ 
+    /* Styles */
+    background: linear-gradient(left, transparent, #444, #b6b6b8, #444, transparent);
+}
+ 
+/* Small flash */
+.form-3:before {
+    /* Size and position */
+    content: "";
+    width: 8px;
+    height: 5px;
+    position: absolute;
+    left: 34%;
+    top: -7px;
+     
+    /* Styles */
+    border-radius: 50%;
+    box-shadow: 0 0 6px 4px #fff;
+}
+
+.form-3 p:nth-child(1):before{
+    /* Size and position */
+    content: "";
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 45px;
+ 
+    /* Styles */
+    transform: rotate(75deg);
+    background: linear-gradient(50deg, rgba(255,255,255,0.15), rgba(0,0,0,0));
+    pointer-events: none;
+}
+
+.no-pointerevents .form-3 p:nth-child(1):before {
+    display: none;
+}
+
+.entry{
+    width:100wh;
+    border:1px solid #AD68BC;
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    list-style-type:none;
+    height:50px;
+    align-items:center;
+    margin:1px auto;
+    padding:auto 3px;
+    font-size:20px;
+}
+
+.entry li:nth-child(-n+4){
+    width:20%;
+    text-align: start;
+}
+
+.entry li:nth-child(1){
+    width:30%;
+}
+
+.entry li:nth-child(n+3){
+    width:calc(30%/3);
+    text-align: end;
+}
+
+.entry li:nth-child(6){
+    margin-right: 6px;
+}
+
+.column{
+    width:100wh;
+    background-color: #AD68BC;
+    color:#fff;
+    text-align: center;
+    font-size:20px;
+    height: 50;
+    border-radius:0 0 4px 4px;
+    margin:0px auto;
+    display:flex;
+    justify-content:space-between;
+    list-style-type:none;
+}
+
+.column li:nth-child(-n+4){
+    width:20%;
+    text-align: start;
+}
+
+.column li:nth-child(1){
+    width:30%;
+}
+
+.column li:nth-child(n+3){
+    width:calc(30%/3);
+    text-align: end;
+}
+
+.column li:nth-child(6){
+    margin-right: 6px;
+}
+
+.header{
+    width:100wh;
+    display:flex;
+    justify-content:space-between;
+    max-height:80px;
+    color: rgb(100, 59, 109);
+    font-size:50%;
+    text-align: end;
+    margin:0px auto 15px auto;
+    align-items:center
+}
+
+.header h2{
+    font-size: 25px;
+    -webkit-margin-before: 0;
+}
+
+#back{
+    height:80px;
+}
+
+.non_border{
+    border:0px;
+    align-items:flex-start;
+}
+
+.bottom{
+    position: absolute;
+    bottom: 0px;
+    width:100%;
+    height:50px;
+    color: rgb(100, 59, 109);
+    font-size:20px;
+}
+
+hr{
+    height:3px;
+    background-color: #AD68BC;
+}
