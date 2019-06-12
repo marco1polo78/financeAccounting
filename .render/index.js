@@ -1,6 +1,7 @@
 'use strict'
 
 const parse = require('./parse');
+const prompt = require('electron-prompt');
 const PATHTOEXCEL=__dirname.replace('.render','Номенклатура (2).xlsx');
 let table,listClass;
 const fs=require('fs');
@@ -35,6 +36,9 @@ let menuHTML=`
 </div>
 `;
 let list=`
+<form>
+  <input type="text" class="search" placeholder="Шукати тут...">
+</form>
 <ul class="column">
     <li>Наименование</li>
     <li>id покупателя</li>
@@ -75,6 +79,7 @@ buttonAction.addEventListener('click',()=>{
             );
         };
         listClass=document.querySelectorAll('.entry');
+        let search=document.querySelector('.search');
 
         listClass.forEach(li=>{
             li.addEventListener('click',(e)=>{
@@ -84,6 +89,49 @@ buttonAction.addEventListener('click',()=>{
                 back.addEventListener('click',()=>getTable(table));
             }, false);
         })
+
+        search.oninput = function() {
+            if(search.value!=='' && !search.value.match(/^\s{1,}/i)){
+                document.querySelector('.list').innerHTML='';
+                for(let key in table){
+                    if(table[key].name.match(search.value))
+                        document.querySelector('.list').insertAdjacentHTML('beforeend',
+                        `<ul class="entry" name="${table[key].name}">
+                        <li>${table[key].name}</li>
+                        <li>${table[key].idcustomer[0] || ''}</li>
+                        <li>${table[key].idprovider[0] || ''}</li>
+                        <li>${table[key].remainder}</li>
+                        <li>${table[key].priceComing}</li>
+                        <li>${table[key].salesPrice}</li>
+                        </ul>`
+                        );
+                };  
+            }else{
+                document.querySelector('.list').innerHTML='';
+                for(let key in table){
+                        document.querySelector('.list').insertAdjacentHTML('beforeend',
+                        `<ul class="entry" name="${table[key].name}">
+                        <li>${table[key].name}</li>
+                        <li>${table[key].idcustomer[0] || ''}</li>
+                        <li>${table[key].idprovider[0] || ''}</li>
+                        <li>${table[key].remainder}</li>
+                        <li>${table[key].priceComing}</li>
+                        <li>${table[key].salesPrice}</li>
+                        </ul>`
+                        )
+                }
+            }
+            listClass=document.querySelectorAll('.entry');
+
+            listClass.forEach(li=>{
+                li.addEventListener('click',(e)=>{
+                    entry=e.currentTarget;
+                    getEntry(table,entry);
+        
+                    back.addEventListener('click',()=>getTable(table));
+                }, false);
+            })
+        };
     }
 
     function getEntry(table,entry){
@@ -106,12 +154,12 @@ buttonAction.addEventListener('click',()=>{
         `;
         document.querySelector('.list').insertAdjacentHTML('beforeend',
         `<ul class="entry non_border" name="${table[name].name}">
-        <li>${table[name].name}</li>
-        <li>${getIdCustomer(table)}</li>
-        <li>${getIdProvider(table)}</li>
-        <li>${table[name].remainder}</li>
-        <li>${table[name].priceComing}</li>
-        <li>${table[name].salesPrice}</li>
+        <li class="value" name="${name};;name">${table[name].name}</li>
+        <li class="value" name="${name};;idcustomer">${getIdCustomer(table)}</li>
+        <li class="value" name="${name};;idprovider">${getIdProvider(table)}</li>
+        <li class="value" name="${name};;remainder">${table[name].remainder}</li>
+        <li class="value" name="${name};;priceComing">${table[name].priceComing}</li>
+        <li class="value" name="${name};;salesPrice">${table[name].salesPrice}</li>
         </ul>`
         );
 
@@ -129,7 +177,10 @@ buttonAction.addEventListener('click',()=>{
             let text='';
             if(table[name].idprovider.length!==0){
                 table[name].idprovider.forEach(e=>{
-                    text+=e+'<br>'
+                    if(text!=''){
+                        text+='<br>'+e;}
+                    else{
+                        text+=e;}
                 })
             }
             return text;
@@ -139,7 +190,53 @@ buttonAction.addEventListener('click',()=>{
         Советы:${validation(table[name])}
         <div>
         `);
-        console.log(entry.getAttribute('name'));
+
+        listClass=document.querySelectorAll('.value');
+
+        listClass.forEach(li=>{
+            li.addEventListener('click',(e)=>{
+                prompt({
+                    title: 'Редагирование',
+                    label: 'Введите значение:',
+                    value: li.innerHTML.replace(/<br>/gi,', '),
+                    inputAttrs: {type: 'text', required: true}
+                })
+                .then((result)=>{
+                    if(result && result!==li.innerHTML.replace(/<br>/gi,', ')){
+                        let array=result.split(', ');
+                        let atribute=li.getAttribute('name').split(';;');
+                        console.log(atribute[1])
+                        if(!atribute[1].match(/idcustomer|idprovider/)){
+                            if(array[0]!=='')
+                                {
+                                if(atribute[1]!=='name'){
+                                    table[atribute[0]][atribute[1]]=array[0];}
+                                else{
+                                    table[array[0]]=table[atribute[0]];
+                                    table[array[0]].name=array[0];
+                                    delete table[atribute[0]];
+                                }
+                                li.innerHTML=array[0];}
+                        }else{
+                            li.innerHTML='';
+                            if(!array[0].match(/\s{1,}/i)){
+                                table[atribute[0]][atribute[1]]=array;
+                                array.forEach(e=>{
+                                    if(li.innerHTML!=''){
+                                        li.innerHTML+='<br>'+e;}
+                                    else{
+                                        li.innerHTML+=e;}
+                                })}else{
+                                    table[atribute[0]][atribute[1]]=[];
+                                }                            
+                        }
+                    }
+                    document.querySelector('.bottom').innerHTML=`
+                        Советы:${validation(table[name])}
+                    `;    
+                })                            
+            }, false);
+        })
     }
 
     function validation(entry){
@@ -150,7 +247,8 @@ buttonAction.addEventListener('click',()=>{
         if(table[name].idprovider.length===0){
             text+='Желательно найти поставщиков, нужно закупать товар<br>'
         }
-        if(table[name].remainder<4000){
+        
+        if(parseInt(table[name].remainder)<4000){
             text+='Желательно скупиться большим запасом материала, на него высокий спрос<br>'
         }
         return text;
