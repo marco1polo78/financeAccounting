@@ -339,10 +339,11 @@ span {
     display:flex;
     justify-content:space-between;
     list-style-type:none;
-    height:40px;
+    height:50px;
     align-items:center;
     margin:1px auto;
     padding:auto 3px;
+    font-size:20px;
 }
 
 .entry li:nth-child(-n+4){
@@ -419,4 +420,18 @@ span {
 .non_border{
     border:0px;
     align-items:flex-start;
+}
+
+.bottom{
+    position: absolute;
+    bottom: 0px;
+    width:100%;
+    height:50px;
+    color: rgb(100, 59, 109);
+    font-size:20px;
+}
+
+hr{
+    height:3px;
+    background-color: #AD68BC;
 }

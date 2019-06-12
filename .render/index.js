@@ -134,12 +134,25 @@ buttonAction.addEventListener('click',()=>{
             }
             return text;
         }
-
+        document.querySelector('.list').insertAdjacentHTML('beforeend',`
+        <div class="bottom">
+        Советы:${validation(table[name])}
+        <div>
+        `);
         console.log(entry.getAttribute('name'));
     }
 
-    function validation(table,entry){
-
+    function validation(entry){
+        let text='';
+        if(table[name].idcustomer.length===0){
+            text+='Желательно найти покупателей, товар простаивает на складе<br>'
+        }
+        if(table[name].idprovider.length===0){
+            text+='Желательно найти поставщиков, нужно закупать товар<br>'
+        }
+        if(table[name].remainder<4000){
+            text+='Желательно скупиться большим запасом материала, на него высокий спрос<br>'
+        }
+        return text;
     }
-
 })
